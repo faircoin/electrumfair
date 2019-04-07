@@ -1,3 +1,171 @@
+# Release 3.3.4 - (February 13, 2019)
+
+ * AppImage: we now also distribute self-contained binaries for x86_64
+   Linux in the form of an AppImage (#5042). The Python interpreter,
+   PyQt5, libsecp256k1, PyCryptodomex, zbar, hidapi/libusb (including
+   hardware wallet libraries) are all bundled. Note that users of
+   hw wallets still need to set udev rules themselves.
+ * hw wallets: fix a regression during transaction signing that prompts
+   the user too many times for confirmations (commit 2729909)
+ * transactions now set nVersion to 2, to mimic Bitcoin Core
+ * fix Qt bug that made all hw wallets unusable on Windows 8.1 (#4960)
+ * fix bugs in wallet creation wizard that resulted in corrupted
+   wallets being created in rare cases (#5082, #5057)
+ * fix compatibility with Qt 5.12 (#5109)
+
+
+# Release 3.3.3 - (January 25, 2019)
+
+ * Do not expose users to server error messages (#4968)
+ * Notify users of new releases. Release announcements must be signed,
+   and they are verified byElectrum using a hardcoded Bitcoin address.
+ * Hardware wallet fixes (#4991, #4993, #5006)
+ * Display only QR code in QRcode Window
+ * Fixed code signing on MacOS
+ * Randomise locktime of transactions
+
+
+# Release 3.3.2 - (December 21, 2018)
+
+ * Fix Qt history export bug
+ * Improve network timeouts
+ * Prepend server transaction_broadcast error messages with
+   explanatory message. Render error messages as plain text.
+
+
+# Release 3.3.1 - (December 20, 2018)
+
+ * Qt: Fix invoices tab crash (#4941)
+ * Android: Minor GUI improvements
+
+
+# Release 3.3.0 - Hodler's Edition (December 19, 2018)
+
+ * The network layer has been rewritten using asyncio and aiorpcx.
+   In addition to easier maintenance, this makes the client
+   more robust against misbehaving servers.
+ * The minimum python version was increased to 3.6
+ * The blockchain headers and fork handling logic has been generalized.
+   Clients by default now follow chain based on most work, not length.
+ * New wallet creation defaults to native segwit (bech32).
+ * Segwit 2FA: TrustedCoin now supports native segwit p2wsh
+   two-factor wallets.
+ * RBF batching (opt-in): If the wallet has an unconfirmed RBF
+   transaction, new payments will be added to that transaction,
+   instead of creating new transactions.
+ * MacOS: support QR code scanner in binaries.
+ * Android APK:
+   - build using Google NDK instead of Crystax NDK
+   - target API 28
+   - do not use external storage (previously for block headers)
+ * hardware wallets:
+   - Coldcard now supports spending from p2wpkh-p2sh,
+     fixed p2pkh signing for fw 1.1.0
+   - Archos Safe-T mini: fix #4726 signing issue
+   - KeepKey: full segwit support
+   - Trezor: refactoring and compat with python-trezor 0.11
+   - Digital BitBox: support firmware v5.0.0
+ * fix bitcoin URI handling when app already running (#4796)
+ * Qt listings rewritten:
+   the History tab now uses QAbstractItemModel, the other tabs use
+   QStandardItemModel. Performance should be better for large wallets.
+ * Several other minor bugfixes and usability improvements.
+
+
+# Release 3.2.3 - (September 3, 2018)
+
+ * hardware wallet: the Safe-T mini from Archos is now supported.
+ * hardware wallet: the Coldcard from Coinkite is now supported.
+ * BIP39 seeds: if a seed extension (aka passphrase) contained
+   multiple consecutive whitespaces or leading/trailing whitespaces
+   then the derived addresses were not following spec. This has been
+   fixed, and affected should move their coins. The wizard will show a
+   warning in this case. (#4566)
+ * Revealer: the PRNG used has been changed (#4649)
+ * fix Linux distributables: 'typing' was not bundled, needed for python 3.4
+ * fix #4626: fix spending from segwit multisig wallets involving a Trezor
+   cosigner when using a custom derivation path
+ * fix #4491: on Android, if user had set "uBTC" as base unit, app crashed
+ * fix #4497: on Android, paying bip70 invoices from cold start did not work
+ * Several other minor bugfixes and usability improvements.
+
+
+# Release 3.2.2 - (July 2nd, 2018)
+
+ * Fix DNS resolution on Windows
+ * Fix websocket bug in daemon
+
+
+# Release 3.2.1 - (July 1st, 2018)
+
+ * fix Windows binaries: due to build process changes, the locale files
+   were not included; the language could not be changed from English
+ * fix Linux distributables: wordlists were not included (#4475)
+
+
+# Release 3.2.0 - Satoshi's Vision (June 30, 2018)
+
+ * If present, libsecp256k1 is used to speed up elliptic curve
+   operations. The library is bundled in the Windows, MacOS, and
+   Android binaries. On Linux, it needs to be installed separately.
+ * Two-factor authentication is available on Android. Note that this
+   will only provide additional security if one time passwords are
+   generated on a separate device.
+ * Semi-automated crash reporting is implemented for Android.
+ * Transactions that are dropped from the mempool are kept in the
+   wallet as 'local', and can be rebroadcast. Previously these
+   transactions were deleted from the wallet.
+ * The scriptSig and witness part of transaction inputs are no longer
+   parsed, unless actually needed. The wallet will no longer display
+   'from' addresses corresponding to transaction inputs, except for
+   its own inputs.
+ * The partial transaction format has been incompatibly changed. This
+   was needed as for partial transactions the scriptSig/witness has to
+   be parsed, but for signed transactions we did not want to do the
+   parsing.  Users should make sure that all instances of Electrum
+   they use to co-sign or offline sign, are updated together.
+ * Signing of partial transactions created with online imported
+   addresses wallets now supports significantly more
+   setups. Previously only online p2pkh address + offline WIF was
+   supported.  Now the following setups are all supported:
+   - online {p2pkh, p2wpkh-p2sh, p2wpkh} address + offline WIF,
+   - online {p2pkh, p2wpkh-p2sh, p2wpkh} address + offline seed/xprv,
+   - online {p2sh, p2wsh-p2sh, p2wsh}-multisig address + offline seeds/xprvs
+     (potentially distributed among several different machines)
+   Note that for the online address + offline HD secret case, you need
+   the offline wallet to recognize the address (i.e. within gap
+   limit).  Having an xpub on the online machine is still the
+   recommended setup, as this allows the online machine to generate
+   new addresses on demand.
+ * Segwit multisig for bip39 and hardware wallets is now enabled.
+   (both p2wsh-p2sh and native p2wsh)
+ * Ledger: offline signing for segwit inputs (#3302) This has already
+   worked for Trezor and Digital Bitbox. Offline segwit signing can be
+   combined with online imported addresses wallets.
+ * Added Revealer plugin. ( https://revealer.cc ) Revealer is a seed
+   phrase back-up solution. It allows you to create a cold, analog,
+   multi-factor backup of your wallet seeds, or of any arbitrary
+   secret. The Revealer utilizes a transparent plastic visual one time
+   pad.
+ * Fractional fee rates: the Qt GUI now displays fee rates with 0.1
+   sat/byte precision, and also allows this same resolution in the
+   Send tab.
+ * Hardware wallets: a "show address" button is now displayed in the
+   Receive tab of the Qt GUI. (#4316)
+ * Trezor One: implemented advanced/matrix recovery (#4329)
+ * Qt/Kivy: added "sat" as optional base unit.
+ * Kivy GUI: significant performance improvements when displaying
+   history and address list of large wallets; and transaction dialog
+   of large transactions.
+ * Windows: use dnspython to resolve dns instead of socket.getaddrinfo
+   (#4422)
+ * Importing minikeys: use uncompressed pubkey instead of compressed
+   (#4384)
+ * SPV proofs: check inner nodes not to be valid transactions (#4436)
+ * Qt GUI: there is now an optional "dark" theme (#4461)
+ * Several other minor bugfixes and usability improvements.
+
+
 # Release 3.1.3 - (April 16, 2018)
 
  * Qt GUI: seed word auto-complete during restore
@@ -129,7 +297,7 @@ issue #3374. Users should upgrade to 3.0.5.
   * Qt GUI: sweeping now uses the Send tab, allowing fees to be set
   * Windows: if using the installer binary, there is now a separate shortcut
     for "Electrum Testnet"
-  * Digital Bitbox: added suport for p2sh-segwit
+  * Digital Bitbox: added support for p2sh-segwit
   * OS notifications for incoming transactions
   * better transaction size estimation:
     - fees for segwit txns were somewhat underestimated (#3347)
@@ -357,7 +525,7 @@ issue #3374. Users should upgrade to 3.0.5.
 
 # Release 2.7.7
   * Fix utf8 encoding bug with old wallet seeds (issue #1967)
-  * Fix delete request from menu (isue #1968)
+  * Fix delete request from menu (issue #1968)
 
 # Release 2.7.6
  * Fixes a critical bug with imported private keys (issue #1966). Keys
@@ -720,7 +888,7 @@ issue #3374. Users should upgrade to 3.0.5.
  * New 'Receive' tab in the GUI:
    - create and manage payment requests, with QR Codes
    - the former 'Receive' tab was renamed to 'Addresses'
-   - the former Point of Sale plugin is replaced by a resizeable
+   - the former Point of Sale plugin is replaced by a resizable
      window that pops up if you click on the QR code
 
  * The 'Send' tab in the Qt GUI supports transactions with multiple
@@ -743,7 +911,7 @@ issue #3374. Users should upgrade to 3.0.5.
 
  * The client accepts servers with a CA-signed SSL certificate.
 
- * ECIES encrypt/decrypt methods, availabe in the GUI and using
+ * ECIES encrypt/decrypt methods, available in the GUI and using
    the command line:
       encrypt <pubkey> <message>
       decrypt <pubkey> <message>
@@ -816,7 +984,7 @@ bugfixes: connection problems, transactions staying unverified
 
 # Release 1.8.1
 
-* Notification option when receiving new tranactions
+* Notification option when receiving new transactions
 * Confirm dialogue before sending large amounts
 * Alternative datafile location for non-windows systems
 * Fix offline wallet creation
