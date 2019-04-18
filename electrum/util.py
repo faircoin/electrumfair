@@ -65,7 +65,7 @@ base_units = {'FAIR':8, 'mFAIR':5, 'uFAIR':2, 'sat':0}
 base_units_inverse = inv_dict(base_units)
 base_units_list = ['FAIR', 'mFAIR', 'uFair', 'sat']  # list(dict) does not guarantee order
 
-DECIMAL_POINT_DEFAULT = 5  # mBTC
+DECIMAL_POINT_DEFAULT = 8  # mBTC
 
 
 class UnknownBaseUnit(Exception): pass

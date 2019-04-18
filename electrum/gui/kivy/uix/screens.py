@@ -63,7 +63,7 @@ class CScreen(Factory.Screen):
 
     @profiler
     def load_screen(self):
-        self.screen = Builder.load_file('electrumfair/gui/kivy/uix/ui_screens/' + self.kvname + '.kv')
+        self.screen = Builder.load_file('electrum/gui/kivy/uix/ui_screens/' + self.kvname + '.kv')
         self.add_widget(self.screen)
         self.loaded = True
         self.update()
@@ -135,7 +135,7 @@ class HistoryScreen(CScreen):
 
     def get_card(self, tx_hash, tx_mined_status, value, balance):
         status, status_str = self.app.wallet.get_tx_status(tx_hash, tx_mined_status)
-        icon = "atlas://electrumfair/gui/kivy/theming/light/" + TX_ICONS[status]
+        icon = "atlas://electrum/gui/kivy/theming/light/" + TX_ICONS[status]
         label = self.app.wallet.get_label(tx_hash) if tx_hash else _('Pruned transaction outputs')
         ri = {}
         ri['screen'] = self
@@ -175,7 +175,7 @@ class SendScreen(CScreen):
             return
         import electrum
         try:
-            uri = electrumfair.util.parse_URI(text, self.app.on_pr)
+            uri = electrum.util.parse_URI(text, self.app.on_pr)
         except:
             self.app.show_info(_("Not a FairCoin URI"))
             return
@@ -261,7 +261,7 @@ class SendScreen(CScreen):
             outputs = [TxOutput(bitcoin.TYPE_ADDRESS, address, amount)]
         message = self.screen.message
         amount = sum(map(lambda x:x[2], outputs))
-        #if self.app.electrumfair_config.get('use_rbf'):
+        #if self.app.electrum_config.get('use_rbf'):
         #    from .dialogs.question import Question
         #    d = Question(_('Should this transaction be replaceable?'), lambda b: self._do_send(amount, message, outputs, b))
         #    d.open()
@@ -270,7 +270,7 @@ class SendScreen(CScreen):
 
     def _do_send(self, amount, message, outputs, rbf):
         # make unsigned transaction
-        config = self.app.electrumfair_config
+        config = self.app.electrum_config
         coins = self.app.wallet.get_spendable_coins(None, config)
         try:
             tx = self.app.wallet.make_unsigned_transaction(coins, outputs, config, None)
@@ -352,7 +352,7 @@ class ReceiveScreen(CScreen):
         return unused
 
     def on_address(self, addr):
-        req = self.app.wallet.get_payment_request(addr, self.app.electrumfair_config)
+        req = self.app.wallet.get_payment_request(addr, self.app.electrum_config)
         self.screen.status = ''
         if req:
             self.screen.message = req.get('memo', '')
@@ -395,7 +395,7 @@ class ReceiveScreen(CScreen):
         amount = self.app.get_amount(amount) if amount else 0
         req = self.app.wallet.make_payment_request(addr, amount, message, None)
         try:
-            self.app.wallet.add_payment_request(req, self.app.electrumfair_config)
+            self.app.wallet.add_payment_request(req, self.app.electrum_config)
             added_request = True
         except Exception as e:
             self.app.show_error(_('Error adding payment request') + ':\n' + str(e))

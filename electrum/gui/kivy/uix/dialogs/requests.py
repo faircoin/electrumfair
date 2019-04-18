@@ -17,7 +17,7 @@ Builder.load_string('''
     amount: ''
     status: ''
     date: ''
-    icon: 'atlas://electrumfair/gui/kivy/theming/light/important'
+    icon: 'atlas://electrum/gui/kivy/theming/light/important'
     Image:
         id: icon
         source: root.icon
@@ -80,10 +80,10 @@ from electrum.paymentrequest import PR_UNPAID, PR_PAID, PR_UNKNOWN, PR_EXPIRED
 from electrum.gui.kivy.uix.context_menu import ContextMenu
 
 pr_icon = {
-    PR_UNPAID: 'atlas://electrumfair/gui/kivy/theming/light/important',
-    PR_UNKNOWN: 'atlas://electrumfair/gui/kivy/theming/light/important',
-    PR_PAID: 'atlas://electrumfair/gui/kivy/theming/light/confirmed',
-    PR_EXPIRED: 'atlas://electrumfair/gui/kivy/theming/light/close'
+    PR_UNPAID: 'atlas://electrum/gui/kivy/theming/light/important',
+    PR_UNKNOWN: 'atlas://electrum/gui/kivy/theming/light/important',
+    PR_PAID: 'atlas://electrum/gui/kivy/theming/light/confirmed',
+    PR_EXPIRED: 'atlas://electrum/gui/kivy/theming/light/close'
 }
 request_text = {
     PR_UNPAID: _('Pending'),
@@ -126,7 +126,7 @@ class RequestsDialog(Factory.Popup):
         self.menu_actions = [(_('Show'), self.do_show), (_('Delete'), self.do_delete)]
         requests_list = self.ids.requests_container
         requests_list.clear_widgets()
-        _list = self.app.wallet.get_sorted_requests(self.app.electrumfair_config)
+        _list = self.app.wallet.get_sorted_requests(self.app.electrum_config)
         for pr in _list:
             ci = self.get_card(pr)
             requests_list.add_widget(ci)
@@ -140,7 +140,7 @@ class RequestsDialog(Factory.Popup):
         from .question import Question
         def cb(result):
             if result:
-                self.app.wallet.remove_payment_request(req.address, self.app.electrumfair_config)
+                self.app.wallet.remove_payment_request(req.address, self.app.electrum_config)
                 self.hide_menu()
                 self.update()
         d = Question(_('Delete request'), cb)

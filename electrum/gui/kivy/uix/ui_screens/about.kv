@@ -1,4 +1,4 @@
-#:import VERSION electrumfair.version.ELECTRUMFAIR_VERSION
+#:import VERSION electrum.version.ELECTRUMFAIR_VERSION
 
 Popup:
     title: _("About ElectrumFair")
@@ -22,7 +22,7 @@ Popup:
                 text: "MIT Licence"
                 size_hint_x: 0.6
             TopLabel:
-                text: _('Homepage')
+                text: _('Homepage1')
                 size_hint_x: 0.4
             TopLabel:
                 markup: True
@@ -32,10 +32,20 @@ Popup:
                     webbrowser.open("https://download.faircoin.world")
                 size_hint_x: 0.6
             TopLabel:
+                text: _('Homepage2')
+                size_hint_x: 0.4
+            TopLabel:
+                markup: True
+                text: '[color=6666ff][ref=x]https://faircoin.co/wallets.php[/ref][/color]'
+                on_ref_press:
+                    import webbrowser
+                    webbrowser.open("https://faircoin.co/wallets.php")
+                size_hint_x: 0.6
+            TopLabel:
                 text: _('Developers')
                 size_hint_x: 0.4
             TopLabel:
-                text: '\n'.join(['Thomas Voegtlin', 'Neil Booth', 'Akshay Arora', u'Thomas K\u00f6nig'])
+                text: '\n'.join(['Thomas Voegtlin', 'Neil Booth', 'Akshay Arora', u'Thomas K\u00f6nig','Sebastian Gampe'])
                 size_hint_x: 0.6
         TopLabel:
             text: _('Distributed by FairCoin development team')
