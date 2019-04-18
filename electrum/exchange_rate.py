@@ -23,16 +23,34 @@ from .simple_config import SimpleConfig
 
 DEFAULT_ENABLED = False
 DEFAULT_CURRENCY = "EUR"
-DEFAULT_EXCHANGE = "ChainFaircoin"  # default exchange should ideally provide historical rates
+DEFAULT_EXCHANGE = "FreeVision"  # default exchange should ideally provide historical rates
 
 
 # See https://en.wikipedia.org/wiki/ISO_4217
-CCY_PRECISIONS = {'BHD': 3, 'BIF': 0, 'BYR': 0, 'CLF': 4, 'CLP': 0,
-                  'CVE': 0, 'DJF': 0, 'GNF': 0, 'IQD': 3, 'ISK': 0,
-                  'JOD': 3, 'JPY': 0, 'KMF': 0, 'KRW': 0, 'KWD': 3,
-                  'LYD': 3, 'MGA': 1, 'MRO': 1, 'OMR': 3, 'PYG': 0,
-                  'RWF': 0, 'TND': 3, 'UGX': 0, 'UYI': 0, 'VND': 0,
-                  'VUV': 0, 'XAF': 0, 'XAU': 4, 'XOF': 0, 'XPF': 0}
+CCY_PRECISIONS = {
+'AED': 2,'ARS': 2,'AUD': 2,
+'BCH': 8,'BDT': 2,'BHD': 3,'BMD': 2,'BNB': 4,'BRL': 2,'BTC': 8,
+'CAD': 2,'CHF': 2,'CLP': 2,'CNY': 2,'CZK': 2,
+'DKK': 2,
+'EOS': 4,'ETH': 8,'EUR': 2,
+'FAIRO': 2,
+'GBP': 2,
+'HKD': 2,'HUF': 2,
+'IDR': 0,'ILS': 2,'INR': 2,
+'JPY': 2,
+'KRW': 0,'KWD': 4,
+'LKR': 2,'LTC': 8,
+'MMK': 0,'MXN': 2,'MYR': 2,
+'NOK': 2,'NZD': 2,
+'PHP': 2,'PKR': 2,'PLN': 2,
+'RUB': 2,
+'SAR': 2,'SEK': 2,'SGD': 2,
+'THB': 2,'TRY': 2,'TWD': 2,
+'USD': 2,
+'VND': 0,'VEF': 0,
+'XAG': 4,'XAU': 8,'XDR': 2,'XLM': 2,'XRP': 2,
+'ZAR': 2
+}
 
 
 class ExchangeBase(PrintError):
@@ -142,19 +160,77 @@ class ExchangeBase(PrintError):
         rates = await self.get_rates('')
         return sorted([str(a) for (a, b) in rates.items() if b is not None and len(a)==3])
 
-class ChainFaircoin(ExchangeBase):
+class FairCoop_ChainFaircoin(ExchangeBase):
 
     async def get_rates(self,ccy):
         json = await self.get_json('chain.fair-coin.org', '/download/ticker')
-        return dict([(r, Decimal(json[r]['last'])) 
+        return dict([(r, Decimal(json[r]['last']))
                      for r in json])
 
-class GetFaircoin(ExchangeBase):
+    def history_ccys(self):
+        return ['BTC','ETH','LTC','BCH','BNB','EOS','XRP','XLM','USD','AED','ARS','AUD','BDT','BHD','BMD','BRL','CAD','CHF','CLP','CNY','CZK','DKK','EUR','GBP','HKD','HUF','IDR','ILS','INR','JPY','KRW','KWD','LKR','MMK','MXN','MYR','NOK','NZD','PHP','PKR','PLN','RUB','SAR','SEK','SGD','THB','TRY','TWD','VEF','VND','ZAR','XDR','XAG','XAU']
+
+    async def request_history(self, ccy):
+        json = await self.get_json('exchange.faircoin.co', '/data/history_faircoop_'+ccy+'.json')
+        return json
+
+class FairCoop_GetFaircoin(ExchangeBase):
 
     async def get_rates(self,ccy):
         json = await self.get_json('getfaircoin.net', '/api/ticker')
-        return dict([(r, Decimal(json[r]['last'])) 
+        return dict([(r, Decimal(json[r]['last']))
                      for r in json])
+
+    def history_ccys(self):
+        return ['BTC','ETH','LTC','BCH','BNB','EOS','XRP','XLM','USD','AED','ARS','AUD','BDT','BHD','BMD','BRL','CAD','CHF','CLP','CNY','CZK','DKK','EUR','GBP','HKD','HUF','IDR','ILS','INR','JPY','KRW','KWD','LKR','MMK','MXN','MYR','NOK','NZD','PHP','PKR','PLN','RUB','SAR','SEK','SGD','THB','TRY','TWD','VEF','VND','ZAR','XDR','XAG','XAU']
+
+    async def request_history(self, ccy):
+        json = await self.get_json('exchange.faircoin.co', '/data/history_faircoop_'+ccy+'.json')
+        return json
+
+class FreeVision(ExchangeBase):
+
+    async def get_rates(self,ccy):
+        json = await self.get_json('exchange.faircoin.co', '/data/ticker')
+        return dict([(r, Decimal(json[r]['last']))
+                     for r in json])
+
+    def history_ccys(self):
+        return ['BTC','ETH','LTC','BCH','BNB','EOS','XRP','XLM','USD','AED','ARS','AUD','BDT','BHD','BMD','BRL','CAD','CHF','CLP','CNY','CZK','DKK','EUR','GBP','HKD','HUF','IDR','ILS','INR','JPY','KRW','KWD','LKR','MMK','MXN','MYR','NOK','NZD','PHP','PKR','PLN','RUB','SAR','SEK','SGD','THB','TRY','TWD','VEF','VND','ZAR','XDR','XAG','XAU']
+
+    async def request_history(self, ccy):
+        json = await self.get_json('exchange.faircoin.co', '/data/history_'+ccy+'.json')
+        return json
+
+
+class FreeVision_mid(ExchangeBase):
+
+    async def get_rates(self,ccy):
+        json = await self.get_json('exchange.faircoin.co', '/data/ticker_mid')
+        return dict([(r, Decimal(json[r]['last']))
+                     for r in json])
+
+    def history_ccys(self):
+        return ['BTC','ETH','LTC','BCH','BNB','EOS','XRP','XLM','USD','AED','ARS','AUD','BDT','BHD','BMD','BRL','CAD','CHF','CLP','CNY','CZK','DKK','EUR','GBP','HKD','HUF','IDR','ILS','INR','JPY','KRW','KWD','LKR','MMK','MXN','MYR','NOK','NZD','PHP','PKR','PLN','RUB','SAR','SEK','SGD','THB','TRY','TWD','VEF','VND','ZAR','XDR','XAG','XAU']
+
+    async def request_history(self, ccy):
+        json = await self.get_json('exchange.faircoin.co', '/data/history_mid_'+ccy+'.json')
+        return json
+
+
+class FreeMarket(ExchangeBase):
+
+    async def get_rates(self,ccy):
+        json = await self.get_json('exchange.faircoin.co', '/data/ticker_freemarket')
+        return dict([(r, Decimal(json[r]['last']))
+                     for r in json])
+
+    def history_ccys(self):
+        return ['BTC','ETH','LTC','BCH','BNB','EOS','XRP','XLM','USD','AED','ARS','AUD','BDT','BHD','BMD','BRL','CAD','CHF','CLP','CNY','CZK','DKK','EUR','GBP','HKD','HUF','IDR','ILS','INR','JPY','KRW','KWD','LKR','MMK','MXN','MYR','NOK','NZD','PHP','PKR','PLN','RUB','SAR','SEK','SGD','THB','TRY','TWD','VEF','VND','ZAR','XDR','XAG','XAU']
+
+    async def request_history(self, ccy):
+        json = await self.get_json('exchange.faircoin.co', '/data/history_freemarket_'+ccy+'.json')
+        return json
 
 
 def dictinvert(d):
