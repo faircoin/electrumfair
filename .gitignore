@@ -5,8 +5,8 @@ build/
 dist/
 *.egg/
 contrib/pyinstaller/
-Electrum.egg-info/
-electrumfair/locale/
+ElectrumFair.egg-info/*
+electrum/locale/**
 .devlocaltmp/
 *_trial_temp
 packages
@@ -17,12 +17,11 @@ bin/
 .idea
 
 # icons
-electrumfair/gui/kivy/theming/light-0.png
-electrumfair/gui/kivy/theming/light.atlas
+electrum/gui/kivy/theming/light-0.png
+electrum/gui/kivy/theming/light.atlas
 
 # tests/tox
 .tox/
 .cache/
 .coverage
 .pytest_cache
-
