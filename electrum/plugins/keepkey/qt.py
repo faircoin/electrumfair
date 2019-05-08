@@ -8,7 +8,7 @@ from PyQt5.QtWidgets import (QVBoxLayout, QLabel, QGridLayout, QPushButton,
                              QTextEdit, QLineEdit, QRadioButton, QCheckBox, QWidget,
                              QMessageBox, QFileDialog, QSlider, QTabWidget)
 
-from electrumfiar.gui.qt.util import (WindowModalDialog, WWLabel, Buttons, CancelButton,
+from electrum.gui.qt.util import (WindowModalDialog, WWLabel, Buttons, CancelButton,
                                   OkButton, CloseButton)
 from electrum.i18n import _
 from electrum.plugin import hook
