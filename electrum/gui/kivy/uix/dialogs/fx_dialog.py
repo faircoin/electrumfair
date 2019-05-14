@@ -60,12 +60,7 @@ Builder.load_string('''
             orientation: 'horizontal'
             size_hint: 1, 0.2
             Button:
-                text: 'Cancel'
-                size_hint: 0.5, None
-                height: '48dp'
-                on_release: popup.dismiss()
-            Button:
-                text: 'OK'
+                text: 'Close'
                 size_hint: 0.5, None
                 height: '48dp'
                 on_release:
