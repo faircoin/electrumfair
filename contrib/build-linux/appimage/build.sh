@@ -9,14 +9,18 @@ BUILDDIR="$CONTRIB/build-linux/appimage/build/appimage"
 APPDIR="$BUILDDIR/electrumfair.AppDir"
 CACHEDIR="$CONTRIB/build-linux/appimage/.cache/appimage"
 
+
 # pinned versions
 PYTHON_VERSION=3.6.8
 PKG2APPIMAGE_COMMIT="83483c2971fcaa1cb0c1253acd6c731ef8404381"
 LIBSECP_VERSION="b408c6a8b287003d1ade5709e6f7bc3c7f1d5be7"
 
+# VERSION=`git describe --tags --dirty --always`
+# VERSION=`git rev-parse --abbrev-ref HEAD`
+# /usr/bin/python3 -c "import electrum.version; print(electrum.version.ELECTRUMFAIR_VERSION)"
 
-VERSION=`git describe --tags --dirty --always`
-APPIMAGE="$DISTDIR/electrumfair-$VERSION-x86_64.AppImage"
+VERSION="$1"
+APPIMAGE="$DISTDIR/ElectrumFair-$VERSION.AppImage"
 
 rm -rf "$BUILDDIR"
 mkdir -p "$APPDIR" "$CACHEDIR" "$DISTDIR"
@@ -116,9 +120,8 @@ mkdir -p "$CACHEDIR/pip_cache"
 "$python" -m pip install --cache-dir "$CACHEDIR/pip_cache" -r "$CONTRIB/deterministic-build/requirements-hw.txt"
 "$python" -m pip install --cache-dir "$CACHEDIR/pip_cache" "$PROJECT_ROOT"
 
-
 info "copying zbar"
-cp "/usr/lib/libzbar.so.0" "$APPDIR/usr/lib/libzbar.so.0"
+cp "/usr/lib/x86_64-linux-gnu/libzbar.so.0" "$APPDIR/usr/lib/libzbar.so.0"
 
 
 info "desktop integration."
