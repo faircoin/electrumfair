@@ -24,7 +24,8 @@ pushd $WINEPREFIX/drive_c/electrumfair
 git submodule init
 git submodule update
 
-VERSION=`git describe --tags --dirty --always`
+# VERSION=`git describe --tags --dirty --always`
+VERSION="$1"
 echo "Last commit: $VERSION"
 
 pushd ./contrib/deterministic-build/electrum-locale
