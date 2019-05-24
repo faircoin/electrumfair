@@ -2,6 +2,7 @@
 
 set -e
 
+VERSION="3.3.4"
 PROJECT_ROOT="$(dirname "$(readlink -e "$0")")/../../.."
 CONTRIB="$PROJECT_ROOT/contrib"
 DISTDIR="$PROJECT_ROOT/dist"
@@ -19,7 +20,6 @@ LIBSECP_VERSION="b408c6a8b287003d1ade5709e6f7bc3c7f1d5be7"
 # VERSION=`git rev-parse --abbrev-ref HEAD`
 # /usr/bin/python3 -c "import electrum.version; print(electrum.version.ELECTRUMFAIR_VERSION)"
 
-VERSION="$1"
 APPIMAGE="$DISTDIR/ElectrumFair-$VERSION.AppImage"
 
 rm -rf "$BUILDDIR"

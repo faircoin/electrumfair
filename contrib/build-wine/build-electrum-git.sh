@@ -1,6 +1,7 @@
 #!/bin/bash
 
 NAME_ROOT=electrumfair
+VERSION="3.3.4"
 
 # These settings probably don't need any change
 export WINEPREFIX=/opt/wine64
@@ -25,7 +26,6 @@ git submodule init
 git submodule update
 
 # VERSION=`git describe --tags --dirty --always`
-VERSION="$1"
 echo "Last commit: $VERSION"
 
 pushd ./contrib/deterministic-build/electrum-locale

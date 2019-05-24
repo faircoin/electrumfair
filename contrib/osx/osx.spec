@@ -4,10 +4,10 @@ from PyInstaller.utils.hooks import collect_data_files, collect_submodules, coll
 
 import sys, os
 
-PACKAGE='Electrum'
+PACKAGE='ElectrumFair'
 PYPKG='electrum'
-MAIN_SCRIPT='run_electrum'
-ICONS_FILE=PYPKG + '/gui/icons/electrum.icns'
+MAIN_SCRIPT='run_electrumfair'
+ICONS_FILE=PYPKG + '/gui/icons/electrumfair.icns'
 APP_SIGN = os.environ.get('APP_SIGN', '')
 
 def fail(*msg):
