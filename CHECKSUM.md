@@ -39,6 +39,11 @@ ElectrumFair-3.3.4-portable.exe
 ```
 
 ```
+ElectrumFair-3.3.4.dmg
+3f37e32fa92dfd0f97513e0dd337e589d7b407c729c4914e72b37ac0b47e8a0b
+```
+
+```
 ElectrumFair-3.3.4.apk
 297e273b2ac15a501fceb858ade713399c88094fcd4814292f4e4ec66d36d2f1
 ```
