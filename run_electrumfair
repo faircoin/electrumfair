@@ -43,7 +43,7 @@ is_local = not is_bundle and os.path.exists(os.path.join(script_dir, "electrumfa
 is_android = 'ANDROID_DATA' in os.environ
 
 # move this back to gui/kivy/__init.py once plugins are moved
-os.environ['KIVY_DATA_DIR'] = os.path.abspath(os.path.dirname(__file__)) + '/electrum/gui/kivy/data/'
+os.environ['KIVY_DATA_DIR'] = os.path.abspath(os.path.dirname(__file__)) + '/electrumfair/gui/kivy/data/'
 
 if is_local or is_android:
     sys.path.insert(0, os.path.join(script_dir, 'packages'))
@@ -75,16 +75,16 @@ def check_imports():
 if not is_android:
     check_imports()
 
-from electrum import util
-from electrum import constants
-from electrum import SimpleConfig
-from electrum.wallet import Wallet
-from electrum.storage import WalletStorage, get_derivation_used_for_hw_device_encryption
-from electrum.util import print_msg, print_stderr, json_encode, json_decode, UserCancelled
-from electrum.util import set_verbosity, InvalidPassword
-from electrum.commands import get_parser, known_commands, Commands, config_variables
-from electrum import daemon
-from electrum import keystore
+from electrumfair import util
+from electrumfair import constants
+from electrumfair import SimpleConfig
+from electrumfair.wallet import Wallet
+from electrumfair.storage import WalletStorage, get_derivation_used_for_hw_device_encryption
+from electrumfair.util import print_msg, print_stderr, json_encode, json_decode, UserCancelled
+from electrumfair.util import set_verbosity, InvalidPassword
+from electrumfair.commands import get_parser, known_commands, Commands, config_variables
+from electrumfair import daemon
+from electrumfair import keystore
 
 # get password routine
 def prompt_password(prompt, confirm=True):
@@ -256,7 +256,7 @@ def run_offline_command(config, config_options, plugins):
 
 
 def init_plugins(config, gui_name):
-    from electrum.plugin import Plugins
+    from electrumfair.plugin import Plugins
     return Plugins(config, gui_name)
 
 
@@ -318,7 +318,7 @@ if __name__ == '__main__':
         config_options['portable'] = True
 
     if config_options.get('portable'):
-        config_options['electrumfair_path'] = os.path.join(os.path.dirname(os.path.realpath(__file__)), 'electrumfair_data')
+        config_options['fair_path'] = os.path.join(os.path.dirname(os.path.realpath(__file__)), 'electrumfair_data')
 
     # kivy sometimes freezes when we write to sys.stderr
     log_verbosity = config_options.get('verbosity') if config_options.get('gui') != 'kivy' else ''
@@ -381,7 +381,7 @@ if __name__ == '__main__':
                 init_plugins(config, 'cmdline')
                 d = daemon.Daemon(config, fd)
                 if config.get('websocket_server'):
-                    from electrum import websockets
+                    from electrumfair import websockets
                     websockets.WebSocketServer(config, d.network)
                 if config.get('requests_dir'):
                     path = os.path.join(config.get('requests_dir'), 'index.html')

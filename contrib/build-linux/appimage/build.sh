@@ -89,28 +89,8 @@ appdir_python() {
 
 python='appdir_python'
 
-
 info "installing pip."
 "$python" -m ensurepip
-
-
-info "preparing electrum-locale."
-(
-    cd "$PROJECT_ROOT"
-    git submodule update --init
-
-    pushd "$CONTRIB"/deterministic-build/electrum-locale
-    if ! which msgfmt > /dev/null 2>&1; then
-        echo "Please install gettext"
-        exit 1
-    fi
-    for i in ./locale/*; do
-        dir="$PROJECT_ROOT/electrum/$i/LC_MESSAGES"
-        mkdir -p $dir
-        msgfmt --output-file="$dir/electrum.mo" "$i/electrum.po" || true
-    done
-    popd
-)
 
 
 info "installing electrumfair and its dependencies."
@@ -126,7 +106,7 @@ cp "/usr/lib/x86_64-linux-gnu/libzbar.so.0" "$APPDIR/usr/lib/libzbar.so.0"
 
 info "desktop integration."
 cp "$PROJECT_ROOT/electrumfair.desktop" "$APPDIR/electrumfair.desktop"
-cp "$PROJECT_ROOT/electrum/gui/icons/electrumfair.png" "$APPDIR/electrumfair.png"
+cp "$PROJECT_ROOT/electrumfair/gui/icons/electrumfair.png" "$APPDIR/electrumfair.png"
 
 
 # add launcher

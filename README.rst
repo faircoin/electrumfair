@@ -57,13 +57,7 @@ Run install (this should install dependencies)::
 Compile the protobuf description file::
 
     sudo apt-get install protobuf-compiler
-    protoc --proto_path=electrum --python_out=electrum electrum/paymentrequest.proto
-
-Create translations (optional)::
-
-    sudo apt-get install python-requests gettext
-    ./contrib/make_locale
-
+    protoc --proto_path=electrumfair --python_out=electrumfair electrumfair/paymentrequest.proto
 
 
 Install on Linux systems
@@ -74,14 +68,14 @@ directory.
 
 If you have pip, you can do::
 
-    python setup.py sdist
-    sudo pip install --pre dist/ElectrumFair-2.0.tar.gz
+    python3 setup.py sdist
+    sudo pip3 install --pre dist/ElectrumFair-3.3.4.tar.gz
 
 
 If you don't have pip, install with::
 
-    python setup.py sdist
-    sudo python setup.py install
+    python3 setup.py sdist
+    sudo python3 setup.py install
 
 
 

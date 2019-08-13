@@ -17,18 +17,18 @@ folder.
 2. Build image
 
     ```
-    $ sudo docker build --no-cache -t electrum-appimage-builder-img contrib/build-linux/appimage
+    $ sudo docker build --no-cache -t electrumfair-appimage-builder-img contrib/build-linux/appimage
     ```
 
 3. Build binary
 
     ```
     $ sudo docker run -it \
-        --name electrum-appimage-builder-cont \
+        --name electrumfair-appimage-builder-cont \
         -v $PWD:/opt/electrumfair \
         --rm \
         --workdir /opt/electrumfair/contrib/build-linux/appimage \
-        electrum-appimage-builder-img \
+        electrumfair-appimage-builder-img \
         ./build.sh
     ```
 
