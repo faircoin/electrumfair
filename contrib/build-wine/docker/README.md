@@ -20,7 +20,7 @@ folder.
 2. Build image
 
     ```
-    $ sudo docker build -t electrum-wine-builder-img contrib/build-wine/docker
+    $ sudo docker build -t electrumfair-wine-builder-img contrib/build-wine/docker
     ```
 
     Note: see [this](https://stackoverflow.com/a/40516974/7499128) if having dns problems
@@ -43,12 +43,12 @@ folder.
     ```
     $ git checkout $REV
     $ sudo docker run -it \
-        --name electrum-wine-builder-cont \
+        --name electrumfair-wine-builder-cont \
         -v $PWD:/opt/wine64/drive_c/electrumfair \
         --rm \
         --workdir /opt/wine64/drive_c/electrumfair/contrib/build-wine \
         electrum-wine-builder-img \
-        ./build.sh $(python3 -c "import electrum.version; print(electrum.version.ELECTRUMFAIR_VERSION)")
+        ./build.sh $(python3 -c "import electrumfair.version; print(electrumfair.version.ELECTRUMFAIR_VERSION)")
     ```
 4. The generated binaries are in `./contrib/build-wine/dist`.
 

@@ -72,7 +72,7 @@
   !define MUI_ABORTWARNING
   !define MUI_ABORTWARNING_TEXT "Are you sure you wish to abort the installation of ${PRODUCT_NAME}?"
 
-  !define MUI_ICON "c:\electrumfair\electrum\gui\icons\electrumfair.ico"
+  !define MUI_ICON "c:\electrumfair\electrumfair\gui\icons\electrumfair.ico"
 
 ;--------------------------------
 ;Pages
@@ -111,7 +111,7 @@ Section
 
   ;Files to pack into the installer
   File /r "dist\electrumfair\*.*"
-  File "c:\electrumfair\electrum\gui\icons\electrumfair.ico"
+  File "c:\electrumfair\electrumfair\gui\icons\electrumfair.ico"
 
   ;Store installation folder
   WriteRegStr HKCU "Software\${PRODUCT_NAME}" "" $INSTDIR

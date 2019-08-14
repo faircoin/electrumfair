@@ -33,7 +33,7 @@ set -e
 wine 'wineboot'
 
 
-cd /tmp/electrum-build
+cd /tmp/electrumfair-build
 
 # Install Python
 # note: you might need "sudo apt-get install dirmngr" for the following

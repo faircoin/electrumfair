@@ -19,7 +19,7 @@ build_dll() {
 }
 
 
-cd /tmp/electrum-build
+cd /tmp/electrumfair-build
 
 if [ ! -d secp256k1 ]; then
     git clone https://github.com/bitcoin-core/secp256k1.git

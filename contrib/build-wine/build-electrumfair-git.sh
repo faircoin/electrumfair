@@ -21,24 +21,8 @@ cd tmp
 
 pushd $WINEPREFIX/drive_c/electrumfair
 
-# Load electrum-locale for this release
-git submodule init
-git submodule update
-
 # VERSION=`git describe --tags --dirty --always`
 echo "Last commit: $VERSION"
-
-pushd ./contrib/deterministic-build/electrum-locale
-if ! which msgfmt > /dev/null 2>&1; then
-    echo "Please install gettext"
-    exit 1
-fi
-for i in ./locale/*; do
-    dir=$WINEPREFIX/drive_c/electrumfair/electrum/$i/LC_MESSAGES
-    mkdir -p $dir
-    msgfmt --output-file=$dir/electrum.mo $i/electrum.po || true
-done
-popd
 
 find -exec touch -d '2000-11-11T11:11:11+00:00' {} +
 popd
