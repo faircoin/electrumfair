@@ -44,6 +44,11 @@ ElectrumFair-3.3.4.dmg
 ```
 
 ```
-ElectrumFair-3.3.4.apk
-297e273b2ac15a501fceb858ade713399c88094fcd4814292f4e4ec66d36d2f1
+ElectrumFair-3.3.4.0-debug.apk
+ab7c4707adbf5f7f279b2febc3536d38c75bb2807904be728a8cc7c60a47493c
+```
+
+```
+ElectrumFair-3.3.4.0-release.apk
+94cd90faa87f26cdda83feb62b1ea98d472bddb4d96370cd447a5383e33c8f57
 ```

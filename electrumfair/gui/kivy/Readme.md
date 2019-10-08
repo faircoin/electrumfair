@@ -9,49 +9,50 @@ This assumes an Ubuntu host, but it should not be too hard to adapt to another
 similar system. The docker commands should be executed in the project's root
 folder.
 
-1. Install Docker
+#### 1. Install Docker
 
-    ```
-    $ curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
-    $ sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
-    $ sudo apt-get update
-    $ sudo apt-get install -y docker-ce
-    ```
+    curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+    sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
+    sudo apt-get update
+    sudo apt-get install -y docker-ce
 
-2. Build image
+#### 2. Build image
 
-    ```
-    $ sudo docker build -t electrum-android-builder-img electrum/gui/kivy/tools
-    ```
+    sudo docker build -t electrumfair-android-builder-img electrumfair/gui/kivy/tools
 
-3. Build locale files
+#### 3. Prepare python dependencies
 
-    ```
-    $ ./contrib/make_locale
-    ```
+    ./contrib/make_packages
 
-4. Prepare pure python dependencies
+#### 4. Build binaries
 
-    ```
-    $ ./contrib/make_packages
-    ```
+##### 4.1 Start docker container
 
-5. Build binaries
-
-    ```
-    $ sudo docker run -it --rm \
-        --name electrum-android-builder-cont \
-        -v $PWD:/home/user/wspace/electrum \
+    sudo docker run -it --rm \
+        --name electrumfair-android-builder-cont \
+        -v $PWD:/home/user/wspace/electrumfair \
         -v ~/.keystore:/home/user/.keystore \
-        --workdir /home/user/wspace/electrum \
-        electrum-android-builder-img \
-        ./contrib/make_apk
-    ```
-    This mounts the project dir inside the container,
-    and so the modifications will affect it, e.g. `.buildozer` folder
-    will be created.
+        --workdir /home/user/wspace/electrumfair \
+        electrumfair-android-builder-img
 
-5. The generated binary is in `./bin`.
+This mounts the project dir inside the container,
+and so the modifications will affect it, e.g. `.buildozer` folder
+will be created.
+
+##### 4.2 make apk - debug version ( for test purposes )
+
+    ./contrib/make_apk
+
+##### 4.3 make apk - release version
+If you don't have a keystore file `~/.keystore/electrumfair.keystore` you can create it ( outside the container )  by
+
+    keytool -genkey -v -keystore ~/.keystore/electrumfair.keystore -alias electrumfair -keyalg RSA -keysize 2048 -validity 10000
+
+Now you can make the release
+
+    ./contrib/make_apk release
+
+##### 4.4. The generated binary is in `./bin`.
 
 
 
