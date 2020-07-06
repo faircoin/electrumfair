@@ -131,6 +131,7 @@ android.whitelist = lib-dynload/_csv.so
 
 # local version that merges branch 866
 p4a.source_dir = /opt/python-for-android
+p4a.branch = stable
 
 #
 # iOS specific
