@@ -19,6 +19,13 @@ fi
 
 pushd ./electrumfair/gui/kivy/
 
+echo $CONTRIB
+echo $ROOT_FOLDER
+echo $PACKAGES
+echo $PWD
+
+ls -l
+
 make theming
 
 if [[ -n "$1"  && "$1" == "release" ]] ; then
