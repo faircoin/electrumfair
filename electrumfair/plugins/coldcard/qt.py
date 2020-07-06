@@ -1,5 +1,5 @@
 import time
-from functoelectrumfair.rt partial
+from functools import partial
 
 from PyQt5.QtCore import Qt, pyqtSignal
 from PyQt5.QtWidgets import QPushButton, QLabel, QVBoxLayout, QWidget, QGridLayout
