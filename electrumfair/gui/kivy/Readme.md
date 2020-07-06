@@ -16,17 +16,21 @@ folder.
     sudo apt-get update
     sudo apt-get install -y docker-ce
 
-#### 2. Build image
+#### 2. clone or download repository
+    git clone https://github.com/faircoin/electrumfair
+    cd electrumfair
+
+#### 3. Build image
 
     sudo docker build -t electrumfair-android-builder-img electrumfair/gui/kivy/tools
 
-#### 3. Prepare python dependencies
+#### 4. Prepare python dependencies
 
     ./contrib/make_packages
 
-#### 4. Build binaries
+#### 5. Build binaries
 
-##### 4.1 Start docker container
+##### 5.1 Start docker container
 
     sudo docker run -it --rm \
         --name electrumfair-android-builder-cont \
@@ -39,11 +43,11 @@ This mounts the project dir inside the container,
 and so the modifications will affect it, e.g. `.buildozer` folder
 will be created.
 
-##### 4.2 make apk - debug version ( for test purposes )
+##### 5.2 make apk - debug version ( for test purposes )
 
     ./contrib/make_apk
 
-##### 4.3 make apk - release version
+##### 5.3 make apk - release version
 If you don't have a keystore file `~/.keystore/electrumfair.keystore` you can create it ( outside the container )  by
 
     keytool -genkey -v -keystore ~/.keystore/electrumfair.keystore -alias electrumfair -keyalg RSA -keysize 2048 -validity 10000
@@ -52,7 +56,7 @@ Now you can make the release
 
     ./contrib/make_apk release
 
-##### 4.4. The generated binary is in `./bin`.
+##### 5.4. The generated binary is in `./bin`.
 
 
 
@@ -65,14 +69,22 @@ You probably need to clear the cache: `rm -rf .buildozer/android/platform/build/
 ### How do I deploy on connected phone for quick testing?
 Assuming `adb` is installed:
 ```
-$ adb -d install -r bin/Electrum-*-debug.apk
-$ adb shell monkey -p org.electrum.electrum 1
+## install wallet on Android #############################
+adb -d install -r ./bin/ElectrumFair-3.3.4.0-release.apk
+
+## run wallet ############################################
+adb shell monkey -p org.electrumfair.electrumfair 1
+
+## show live logs ########################################
+adb logcat     # ( show all logs )
+adb logcat *:W # ( show only warnings and errors )
+adb logcat *:E # ( show only errors )
 ```
 
 
 ### How do I get an interactive shell inside docker?
 ```
-$ sudo docker run -it --rm \
+sudo docker run -it --rm \
     -v $PWD:/home/user/wspace/electrum \
     --workdir /home/user/wspace/electrum \
     electrum-android-builder-img

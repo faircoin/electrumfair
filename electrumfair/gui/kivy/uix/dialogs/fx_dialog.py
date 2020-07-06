@@ -74,7 +74,7 @@ from kivy.uix.checkbox import CheckBox
 from kivy.uix.widget import Widget
 from kivy.clock import Clock
 
-from ...gui.kivy.i18n import _
+from electrumfair.gui.kivy.i18n import _
 
 from functools import partial
 

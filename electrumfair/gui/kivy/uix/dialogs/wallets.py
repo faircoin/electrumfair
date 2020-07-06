@@ -5,9 +5,9 @@ from kivy.factory import Factory
 from kivy.properties import ObjectProperty
 from kivy.lang import Builder
 
-from ...util import base_units
+from electrumfair.util import base_units
 
-from ...i18n import _
+from electrumfair.i18n import _
 from .label_dialog import LabelDialog
 
 Builder.load_string('''

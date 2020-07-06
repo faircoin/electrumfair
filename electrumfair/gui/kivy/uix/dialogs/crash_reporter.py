@@ -10,9 +10,9 @@ from kivy.lang import Builder
 from kivy.uix.label import Label
 from kivy.utils import platform
 
-from ...gui.kivy.i18n import _
+from electrumfair.gui.kivy.i18n import _
 
-from ...base_crash_reporter import BaseCrashReporter
+from electrumfair.base_crash_reporter import BaseCrashReporter
 
 
 Builder.load_string('''

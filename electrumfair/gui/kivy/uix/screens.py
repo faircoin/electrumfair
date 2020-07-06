@@ -18,18 +18,18 @@ from kivy.lang import Builder
 from kivy.factory import Factory
 from kivy.utils import platform
 
-from ...util import profiler, parse_URI, format_time, InvalidPassword, NotEnoughFunds, Fiat
-from ... import bitcoin
-from ...transaction import TxOutput
-from ...util import send_exception_to_crash_reporter
-from ...paymentrequest import PR_UNPAID, PR_PAID, PR_UNKNOWN, PR_EXPIRED
-from ...plugin import run_hook
-from ...wallet import InternalAddressCorruption
+from electrumfair.util import profiler, parse_URI, format_time, InvalidPassword, NotEnoughFunds, Fiat
+from electrumfair import bitcoin
+from electrumfair.transaction import TxOutput
+from electrumfair.util import send_exception_to_crash_reporter
+from electrumfair.paymentrequest import PR_UNPAID, PR_PAID, PR_UNKNOWN, PR_EXPIRED
+from electrumfair.plugin import run_hook
+from electrumfair.wallet import InternalAddressCorruption
 
 from .context_menu import ContextMenu
 
 
-from ...gui.kivy.i18n import _
+from electrumfair.gui.kivy.i18n import _
 
 class HistoryRecycleView(RecycleView):
     pass
@@ -175,7 +175,7 @@ class SendScreen(CScreen):
             return
         import electrumfair
         try:
-            uri = ...util.parse_URI(text, self.app.on_pr)
+            uri = parse_URI(text, self.app.on_pr)
         except:
             self.app.show_info(_("Not a FairCoin URI"))
             return
@@ -217,7 +217,7 @@ class SendScreen(CScreen):
             # it should be already saved
             return
         # save address as invoice
-        from ...paymentrequest import make_unsigned_request, PaymentRequest
+        from electrumfair.paymentrequest import make_unsigned_request, PaymentRequest
         req = {'address':self.screen.address, 'memo':self.screen.message}
         amount = self.app.get_amount(self.screen.amount) if self.screen.amount else 0
         req['amount'] = amount
@@ -363,7 +363,7 @@ class ReceiveScreen(CScreen):
         Clock.schedule_once(lambda dt: self.update_qr())
 
     def get_URI(self):
-        from ...util import create_bip21_uri
+        from electrumfair.util import create_bip21_uri
         amount = self.screen.amount
         if amount:
             a, u = self.screen.amount.split()
