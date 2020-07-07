@@ -104,4 +104,4 @@ See :code:`contrib/build-wine/docker/README.md`.
 Android
 -------
 
-See :code:`electrum/gui/kivy/Readme.md`.
+See :code:`contrib/android/Readme.md`.
