@@ -22,8 +22,14 @@ pushd ./contrib/android
 make theming
 
 if [[ -n "$1"  && "$1" == "release" ]] ; then
-    echo -n Keystore Password:
-    read -s password
+
+    if [[ -z "${KEYSTORE_PASSWORD}" ]] ; then
+      echo -n Keystore Password:
+      read -s password
+    else
+      password=${KEYSTORE_PASSWORD}
+    fi
+
     export P4A_RELEASE_KEYSTORE=~/.keystore/electrumfair.keystore
     export P4A_RELEASE_KEYSTORE_PASSWD=$password
     export P4A_RELEASE_KEYALIAS_PASSWD=$password
