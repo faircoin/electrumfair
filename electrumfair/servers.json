@@ -11,10 +11,9 @@
         "t": "51811",
         "version": "1.1"
     },
-    "electrumfair.duckdns.org": { 
+    "server.faircoin.co": {
         "pruning": "-",
         "s": "51812",
-        "t": "51811",
         "version": "1.4"
     }
 }
