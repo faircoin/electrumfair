@@ -11,7 +11,7 @@
         "t": "51811",
         "version": "1.1"
     },
-    "server.faircoin.co": {
+    "electrum.faircoin.co": {
         "pruning": "-",
         "s": "51812",
         "version": "1.4"
