@@ -170,7 +170,6 @@ rm -rf "$APPDIR"/usr/lib/python3.6/site-packages/PyQt5/Qt/lib/libQt5Xml*
 # these are deleted as they were not deterministic; and are not needed anyway
 find "$APPDIR" -path '*/__pycache__*' -delete
 rm "$APPDIR"/usr/lib/libsecp256k1.a
-rm "$APPDIR"/usr/lib/python3.6/site-packages/pyblake2-*.dist-info/RECORD
 rm "$APPDIR"/usr/lib/python3.6/site-packages/hidapi-*.dist-info/RECORD
 
 
