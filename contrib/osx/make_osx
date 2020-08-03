@@ -5,7 +5,7 @@ VERSION="3.3.4"
 PYTHON_VERSION=3.6.4
 BUILDDIR=/tmp/electrumfair-build
 PACKAGE=ElectrumFair
-GIT_REPO=https://github.com/criptomart/electrumfair.git
+GIT_REPO=https://github.com/faircoin/electrumfair.git
 LIBSECP_VERSION="b408c6a8b287003d1ade5709e6f7bc3c7f1d5be7"
 
 . $(dirname "$0")/base.sh
@@ -72,7 +72,7 @@ git submodule update
 rm  -rf $BUILDDIR > /dev/null 2>&1
 mkdir $BUILDDIR
 
-cp -R ./contrib/deterministic-build/electrum-locale/locale/ ./electrum/locale/
+# cp -R ./contrib/deterministic-build/electrum-locale/locale/ ./electrum/locale/
 
 
 info "Downloading libusb..."
