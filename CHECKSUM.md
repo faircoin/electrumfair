@@ -10,45 +10,35 @@
 
 ```
 ElectrumFair-3.3.4.tar.gz
-7cb3df5d5fd3f09acd8aad1640ad8cf75e14338b141ef8d44edb7333e013ff5d
+dbfdd97e238e086165f257634a85d0e1869d9232ddd802abed441cb796997e2e
 ```
 
 ```
 ElectrumFair-3.3.4.zip
-9ec331909be008a164ae50dd40bef259485ab5bc81f24a12fffa9e912f94f3a5
+310aaf3ae59c83c75b88064436635f6a5c6f51096361fc78bbdfb327b756922a
 ```
 
 ```
 ElectrumFair-3.3.4.AppImage
-2a899815951fc3334e9eeb65eb7f271e6afade5b251f72280fd4803f7bb48fc5
-```
-
-```
-ElectrumFair-3.3.4.exe
-3b89a320af8acfffc49545aa3ba53bbdebea4496b7eb0bdab3a780869ecd69a0
+41560dea4c64b826cde9b4c931e537a1d3f2278a7e20f0e7a81a484fa4243b1a
 ```
 
 ```
 ElectrumFair-3.3.4-setup.exe
-55a19ee14b635f62901f1503a1386fb54086c30e42869dd0111c5dd4295a637c
+82d17c46862f7a1e3d01789f31b9a35fa7c1389834dcdf881e609a0145822d76
 ```
 
 ```
 ElectrumFair-3.3.4-portable.exe
-8c53737b3d82c42f2f02402a146024ff7afe440ae08df1a4f4b1d710861e9e5b
+17e79593163e5c9da2dfb77a3d642094c93f468ba4f25d7fbdd1f39de48d1142
 ```
 
 ```
-ElectrumFair-3.3.4.dmg
-3f37e32fa92dfd0f97513e0dd337e589d7b407c729c4914e72b37ac0b47e8a0b
+ElectrumFair-3.3.4.0-arm64-v8a-release.apk
+4a9dec20d96b8203defc293e1240ed55f079380a344027c70fff62ec75a3c2a5
 ```
 
 ```
-ElectrumFair-3.3.4.0-debug.apk
-ab7c4707adbf5f7f279b2febc3536d38c75bb2807904be728a8cc7c60a47493c
-```
-
-```
-ElectrumFair-3.3.4.0-release.apk
-94cd90faa87f26cdda83feb62b1ea98d472bddb4d96370cd447a5383e33c8f57
+ElectrumFair-3.3.4.0-armeabi-v7a-release.apk
+520936599ab4e025d3d34761fc1df436f6f516bbfe64445fc20ca9f109031912
 ```
